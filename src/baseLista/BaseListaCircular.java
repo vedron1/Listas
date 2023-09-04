@@ -1,7 +1,7 @@
 package src.baseLista;
 import java.lang.reflect.*;
 public class BaseListaCircular<X> {
-    private class No {
+    protected class No {
         private X info;
         private No prox;
 
@@ -32,13 +32,13 @@ public class BaseListaCircular<X> {
         }
     }
 
-    private No primeiro, ultimo;
+    protected No primeiro, ultimo;
 
     public BaseListaCircular(){
         this.primeiro = this.ultimo = null;
     }
 
-    private X meuCloneDeX (X x){
+    protected X meuCloneDeX (X x){
         X ret = null;
 
         try{
@@ -53,47 +53,7 @@ public class BaseListaCircular<X> {
         catch(InvocationTargetException erro){}
 
         return ret;
-    }
-
-    public void guardeUmItemNoInicio (X i) throws Exception{
-        if(i==null)
-            throw new Exception ("Informação ausente");
-        
-        X inserir = null;
-        if(i instanceof Cloneable)
-            inserir = (X)meuCloneDeX(i);
-        else    
-            inserir = i;
-
-        this.primeiro = new No (inserir, this.primeiro);
-        if( this.primeiro.getProx() == null)
-            this.primeiro.setProx(this.primeiro);
-
-        if(this.ultimo == null)
-            this.ultimo = this.primeiro;        
-        else
-            this.ultimo.setProx(this.primeiro);        
-    }
-
-    public void guardeUmItemNoFinal (X i) throws Exception {
-        if(i == null)
-            throw new Exception("Informação ausente");
-        
-        X inserir = null;
-        if(i instanceof Cloneable)
-            inserir = (X)meuCloneDeX(i);
-        else
-            inserir = i;
-
-        if(this.ultimo == null) {
-            this.ultimo = new No (inserir, this.ultimo);
-            this.primeiro = this.ultimo;
-        }
-        else {
-            this.ultimo.setProx(new No (inserir, this.primeiro));
-            this.ultimo = this.ultimo.getProx();
-        }
-    }
+    }   
 
     public void removaItemDoInicio () throws Exception {
         if (this.primeiro==null /*&& this.ultimo==null*/)

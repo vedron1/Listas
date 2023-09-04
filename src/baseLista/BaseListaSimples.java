@@ -42,7 +42,7 @@ public class BaseListaSimples <X>
         }
     } //fim da classe No
 
-    private No primeiro, ultimo;
+    protected No primeiro, ultimo;
 
     public BaseListaSimples ()
     {
@@ -70,47 +70,7 @@ public class BaseListaSimples <X>
 
         return ret;
     }
-
-    public void guardeUmItemNoInicio (X i) throws Exception
-    {
-        if (i==null)
-            throw new Exception ("Informacao ausente");
-
-        X inserir=null;
-        if (i instanceof Cloneable)
-            inserir = (X)meuCloneDeX(i);
-        else
-            inserir = i;
-            
-        this.primeiro = new No (inserir,this.primeiro);
-
-        if (this.ultimo==null)
-            this.ultimo=this.primeiro;
-    }
-
-    public void guardeUmItemNoFinal (X i) throws Exception
-    {
-        if (i==null)
-            throw new Exception ("Informacao ausente");
-
-        X inserir=null;
-        if (i instanceof Cloneable)
-            inserir = (X)meuCloneDeX(i);
-        else
-            inserir = i;
-            
-        if (this.ultimo==null) // && this.primeiro==null
-        {
-            this.ultimo   = new No (inserir);
-            this.primeiro = this.ultimo;
-        }
-        else
-        {
-            this.ultimo.setProx (new No (inserir));
-            this.ultimo = this.ultimo.getProx();
-        }
-    }
-
+    
     public X getElemento(int i) throws Exception{
         if(i <= 0 || i > this.getQuantidade()) throw new Exception("índice inválido");
         No ret = this.primeiro;       
@@ -154,34 +114,7 @@ public class BaseListaSimples <X>
             qtd++;
             atual = atual.getProx();
         }      
-    }
-
-    //3- Inverter a lista criando outra e retornando
-    public BaseListaSimples<X> listaNovaInvertida() throws Exception {
-        BaseListaSimples<X> invertida = new BaseListaSimples<X>();
-        No atual = this.primeiro;
-        int cont = 0;
-        while(cont <= this.getQtdLista()) {            
-            invertida.guardeUmItemNoInicio(atual.getInfo());
-            atual = atual.getProx();
-            cont++;
-        }
-        return invertida;
-    }
-
-    // 4- Inverter a lista sem criar outra
-    public BaseListaSimples<X> listaInvertida() throws Exception {
-        BaseListaSimples<X> invertida = new BaseListaSimples<X>();
-        int cont = 0;
-        No atual = this.primeiro;
-        while(cont <= this.getQtdLista()) {
-            invertida.guardeUmItemNoInicio(atual.getInfo());
-            atual = atual.getProx();
-            this.guardeUmItemNoFinal(invertida.primeiro.getInfo());
-            cont++;
-       }        
-       return this;
-    }
+    }   
 
     public X recupereItemDoInicio () throws Exception
     {

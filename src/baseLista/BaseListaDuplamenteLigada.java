@@ -64,48 +64,7 @@ public class BaseListaDuplamenteLigada<X> {
         catch(InvocationTargetException e){}
 
         return ret;
-    }
-
-    public void guardeUmItemNoInicio (X i) throws Exception {
-        if(i == null) 
-            throw new Exception("Informacao ausente");
-        X inserir = null;
-        if(i instanceof Cloneable) 
-            inserir = (X)meuCloneDex(i);
-        else 
-            inserir = i;
-        if(this.primeiro == null)
-            this.primeiro = new No(inserir);
-        else {
-            this.primeiro = new No(inserir, null, this.primeiro);
-            this.primeiro.prox.setAnt(this.primeiro);
-        }            
-        if(this.ultimo == null) 
-            this.ultimo = this.primeiro;
-
-        // this.primeiro = new No(inserir, null, this.primeiro);
-    }
-
-    public void guardeUmItemNoFinal (X i) throws Exception {
-        if(i == null)
-            throw new Exception ("Informacao ausente");
-        
-        X inserir=null;
-        if(i instanceof Cloneable)
-            inserir = (X)meuCloneDex(i);
-        else
-            inserir = i;
-
-        if(this.ultimo == null) {
-            this.ultimo = new No(inserir);
-            this.primeiro = this.ultimo;
-        }
-        else {
-            this.ultimo.setProx(new No(inserir));
-            this.ultimo.getProx().setAnt(this.ultimo);
-            this.ultimo = this.ultimo.getProx();
-        }
-    }
+    }    
 
     public X getIezimo(int i) throws Exception {
         if(i < 0) throw new Exception("indice invalido");

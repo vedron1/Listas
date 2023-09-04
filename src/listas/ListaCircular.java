@@ -34,11 +34,12 @@ public class ListaCircular<X> {
 
     private No primeiro, ultimo;
 
-    public ListaCircular(){
+    public ListaCircular(){        
         this.primeiro = this.ultimo = null;
     }
 
     private X meuCloneDeX (X x){
+        
         X ret = null;
 
         try{
@@ -56,16 +57,19 @@ public class ListaCircular<X> {
     }
 
     public void guardeUmItemNoInicio (X i) throws Exception{
+        
         if(i==null)
             throw new Exception ("Informação ausente");
         
         X inserir = null;
+
         if(i instanceof Cloneable)
             inserir = (X)meuCloneDeX(i);
         else    
             inserir = i;
 
         this.primeiro = new No (inserir, this.primeiro);
+
         if( this.primeiro.getProx() == null)
             this.primeiro.setProx(this.primeiro);
 
@@ -76,10 +80,12 @@ public class ListaCircular<X> {
     }
 
     public void guardeUmItemNoFinal (X i) throws Exception {
+        
         if(i == null)
             throw new Exception("Informação ausente");
         
         X inserir = null;
+
         if(i instanceof Cloneable)
             inserir = (X)meuCloneDeX(i);
         else
@@ -89,6 +95,7 @@ public class ListaCircular<X> {
             this.ultimo = new No (inserir, this.ultimo);
             this.primeiro = this.ultimo;
         }
+
         else {
             this.ultimo.setProx(new No (inserir, this.primeiro));
             this.ultimo = this.ultimo.getProx();
@@ -96,11 +103,11 @@ public class ListaCircular<X> {
     }
 
     public void removaItemDoInicio () throws Exception {
-        if (this.primeiro==null /*&& this.ultimo==null*/)
+
+        if (this.primeiro==null)
             throw new Exception ("Nada a remover");
 
-        if (this.primeiro==this.ultimo) //so 1 elemento
-        {
+        if (this.primeiro==this.ultimo) {
             this.primeiro=this.ultimo=null;
             return;
         }
@@ -109,13 +116,12 @@ public class ListaCircular<X> {
         this.ultimo.setProx(this.primeiro);
     }
 
-    public void removaItemDoFinal () throws Exception
-    {
-        if (this.primeiro==null/*&&this.ultimo==null*/)
+    public void removaItemDoFinal () throws Exception { 
+
+        if (this.primeiro==null)
             throw new Exception ("Nada a remover");
 
-        if (this.primeiro==this.ultimo) //so 1 elemento
-        {
+        if (this.primeiro==this.ultimo) {
             this.primeiro=this.ultimo=null;
             return;
         }
@@ -124,14 +130,14 @@ public class ListaCircular<X> {
         for (atual=this.primeiro;
              atual.getProx()!=this.ultimo;
              atual=atual.getProx())
-             /*comando vazio*/;
-
+        
         atual.setProx(null);
         this .ultimo=atual;
         this.ultimo.setProx(this.primeiro);
     }
 
     public int getQuantidade() {
+
         int qtd = 0;
         No atual = this.primeiro;
         
@@ -139,43 +145,54 @@ public class ListaCircular<X> {
             return 0;
         
         for(;;) {
+
             qtd++;
+
             if(atual == this.ultimo)
                 return qtd;
+
             atual = atual.getProx();
         }
     }
 
     public X getElemento(int indice) throws Exception {
+        
         if (indice < 1 || indice > this.getQuantidade())
             throw new Exception("Indice inválido");
+        
         No atual = this.primeiro;
         int cont = 1;
+        
         for(;;) {
+
             if(cont == indice)
                 return atual.getInfo();
+                
             atual = atual.getProx();
             cont++;
         }
     }
 
-    public X recupereItemDoInicio () throws Exception{
+    public X recupereItemDoInicio () throws Exception {
+
         if (this.primeiro==null/*&&this.fim==null)*/)
             throw new Exception ("Nada a obter");
 
         X ret = this.primeiro.getInfo();
+
         if (ret instanceof Cloneable)
             ret = meuCloneDeX (ret);
             
         return ret;
     }
 
-    public X recupereItemDoFinal () throws Exception
-    {
-        if (this.primeiro==null/*&&this.ultimo==null)*/)
+    public X recupereItemDoFinal () throws Exception {
+
+        if (this.primeiro==null)
             throw new Exception ("Nada a obter");
 
         X ret = this.ultimo.getInfo();
+
         if (ret instanceof Cloneable)
             ret = meuCloneDeX (ret);
             
@@ -183,19 +200,21 @@ public class ListaCircular<X> {
     }
 
     public boolean isVazia () {
+
         return this.primeiro==null/*&&this.ultimo==null*/;
     }
 
-    public boolean tem (X i) throws Exception
-    {
+    public boolean tem (X i) throws Exception {
         if (i==null)
             throw new Exception ("Informacao ausente");
 		
         No atual=this.primeiro;
 
        for(;;) {
+
             if (i.equals(atual.getInfo()))
                 return true;
+
             if(atual == this.ultimo)
                 return false;
                 
@@ -206,6 +225,7 @@ public class ListaCircular<X> {
     public String toString() {
         String ret = "[";        
         No atual = this.primeiro;
+
         for(;;) {
             ret = ret + atual.getInfo();
             if(atual != ultimo)
@@ -216,8 +236,7 @@ public class ListaCircular<X> {
         }         
     }
 
-    public boolean equals (Object obj)
-    {
+    public boolean equals (Object obj) {
         if (this==obj)
             return true;
 
@@ -232,8 +251,7 @@ public class ListaCircular<X> {
         No atualThis =this .primeiro;
         No atualLista=lista.primeiro;
 
-        while (atualThis!=this.ultimo && atualLista!=this.ultimo)
-        {
+        while (atualThis!=this.ultimo && atualLista!=this.ultimo) {
             if (!atualThis.getInfo().equals(atualLista.getInfo()))
                 return false;
 
@@ -242,24 +260,21 @@ public class ListaCircular<X> {
         }
 
         for(;;) {
-            
+
             if(atualThis == this.ultimo && atualLista == lista.ultimo)
                 break;
-
         }
 
-        if (atualThis!=null  /* && atualLista==null */)
+        if (atualThis!=null)
             return false;
 
-        if (atualLista!=null /* && atualThis ==null */)
+        if (atualLista!=null)
             return false;
-
-        // atualThis==null && atualLista==null
+        
         return true;
     }
     
-    public int hashCode ()
-    {
+    public int hashCode () {
         final int PRIMO = 13; // qualquer número primo serve
         
         int ret=666; // qualquer inteiro positivo serve
@@ -278,8 +293,7 @@ public class ListaCircular<X> {
     }
     
     // construtor de copia
-    public ListaCircular (ListaCircular<X> modelo) throws Exception
-    {
+    public ListaCircular (ListaCircular<X> modelo) throws Exception {
         if (modelo==null)
             throw new Exception ("Modelo ausente");
 
@@ -305,16 +319,13 @@ public class ListaCircular<X> {
         
     }
 
-    public Object clone ()
-    {
+    public Object clone () {
         ListaCircular<X> ret=null;
 
-        try
-        {
+        try {
             ret = new ListaCircular<X> (this);
         }
-        catch (Exception erro)
-        {} // sei que this NUNCA é null e o contrutor de copia da erro quando seu parametro é null
+        catch (Exception erro) {} // sei que this NUNCA é null e o contrutor de copia da erro quando seu parametro é null
 
         return ret;
     }
