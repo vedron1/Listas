@@ -1,0 +1,8 @@
+package src.baseLista.ordenada;
+
+import java.lang.reflect.*;
+
+public class NovaListaSimplesDesordenada <X>
+{
+    
+}

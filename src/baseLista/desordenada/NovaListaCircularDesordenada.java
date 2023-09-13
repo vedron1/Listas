@@ -12,9 +12,9 @@ public class NovaListaCircularDesordenada<X> extends BaseListaCircular<X> {
         throw new Exception("Informação ausente");
         X inserir = null;
         if(i instanceof Cloneable)
-        inserir = (X)super.meuCloneDeX(i);
+            inserir = (X)super.meuCloneDeX(i);
         else
-        inserir = i;
+            inserir = i;
         
         if(super.primeiro == null) {            
             super.primeiro = new No(inserir);
@@ -42,7 +42,8 @@ public class NovaListaCircularDesordenada<X> extends BaseListaCircular<X> {
         else {
             super.ultimo.setProx(new No(inserir, super.primeiro));
             super.ultimo = super.ultimo.getProx();
-            super.ultimo.setProx(super.primeiro);            
+            // nota: conferir se está certo
+            //super.ultimo.setProx(super.primeiro);            
         }
     }
 

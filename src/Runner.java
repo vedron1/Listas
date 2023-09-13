@@ -1,23 +1,34 @@
 package src;
 
 import src.listas.ListaDuplamenteLigadaCircular;
+import src.baseLista.ordenada.*;
 
 public class Runner {
 
     public static void run() {
 
         try {
-            ListaDuplamenteLigadaCircular<String> ldlc = new ListaDuplamenteLigadaCircular<String>();
+            NovaListaCircularOrdenada<Integer> nlco = new NovaListaCircularOrdenada<Integer>();
+            nlco.insercaoEmOrdem(1);
+            nlco.insercaoEmOrdem(2100);
+            nlco.insercaoEmOrdem(23);
+            nlco.insercaoEmOrdem(2);
+            nlco.insercaoEmOrdem(402);
+            nlco.insercaoEmOrdem(2);
+            System.out.println(nlco);
+
+
+            // ListaDuplamenteLigadaCircular<String> ldlc = new ListaDuplamenteLigadaCircular<String>();
             // ldlc.guardeUmItemNoInicio("a");
             // ldlc.guardeUmItemNoInicio("b");
             // ldlc.guardeUmItemNoInicio("c");
-            ldlc.guardeUmItemNoFinal("d");
-            ldlc.guardeUmItemNoFinal("e");
-            ldlc.guardeUmItemNoFinal("f");
-            ldlc.guardeUmItemNoFinal("g");
-            ldlc.guardeUmItemNoFinal("h");
-            System.out.println(ldlc);
-            System.out.println(ldlc.getIezimo(-1));
+            // ldlc.guardeUmItemNoFinal("d");
+            // ldlc.guardeUmItemNoFinal("e");
+            // ldlc.guardeUmItemNoFinal("f");
+            // ldlc.guardeUmItemNoFinal("g");
+            // ldlc.guardeUmItemNoFinal("h");
+            // System.out.println(ldlc);
+            // System.out.println(ldlc.getIezimo(-1));
             // ListaDuplamenteLigada<String> ldl = new ListaDuplamenteLigada();
             // System.out.println(ldl.getQuantidade());
             // ldl.guardeUmItemNoFinal("d");
